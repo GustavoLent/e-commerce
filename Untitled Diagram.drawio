@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-10-13T19:00:03.395Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="WGRHzpXNrxlhQBE-iN9_" version="15.5.2" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-13T20:57:00.218Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="7YPscrx3A1-1BI4spBuL" version="15.5.2" type="github">
   <diagram id="6S_1dQl8GB7yxVcmzpOy" name="Page-1">
-    <mxGraphModel dx="981" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1185" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -25,11 +25,11 @@
         <mxCell id="gHEY0DMogNfF5QJCRTJP-28" value="&lt;h1&gt;orders-api&lt;/h1&gt;&lt;p&gt;- REST API that receives the user orders&lt;/p&gt;&lt;p&gt;- Produce events in the stream platform&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;dashed=1;sketch=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="680" width="190" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="gHEY0DMogNfF5QJCRTJP-29" value="&lt;h1&gt;delivery-service&lt;/h1&gt;&lt;p&gt;Receives the order from stream platform and execute actions based in his rules&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;dashed=1;sketch=0;" vertex="1" parent="1">
-          <mxGeometry x="280" y="680" width="240" height="120" as="geometry" />
+        <mxCell id="gHEY0DMogNfF5QJCRTJP-29" value="&lt;h1&gt;delivery-service&lt;/h1&gt;&lt;p&gt;- Receives the order from stream platform&lt;/p&gt;&lt;p&gt;- Based in his rules, will define the ship action&lt;/p&gt;&lt;p&gt;&lt;b&gt;* order necessary data:&lt;/b&gt;&lt;/p&gt;&lt;p&gt;- destiny&lt;/p&gt;&lt;p&gt;- item&lt;/p&gt;&lt;p&gt;- amount&lt;/p&gt;&lt;p&gt;* returns&lt;/p&gt;&lt;p&gt;&lt;b&gt;* returns:&lt;/b&gt;&lt;/p&gt;&lt;p&gt;- package id&lt;/p&gt;&lt;p&gt;- shipping company&lt;/p&gt;&lt;p&gt;- delivery time&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;dashed=1;sketch=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="680" width="240" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="gHEY0DMogNfF5QJCRTJP-30" value="&lt;h1&gt;inventory-service&lt;/h1&gt;&lt;p&gt;Receives the order from stream platform and execute actions based in his rules&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;dashed=1;sketch=0;" vertex="1" parent="1">
-          <mxGeometry x="560" y="680" width="240" height="120" as="geometry" />
+        <mxCell id="gHEY0DMogNfF5QJCRTJP-30" value="&lt;h1&gt;inventory-service&lt;/h1&gt;&lt;p&gt;- Receives the order from stream platform&lt;/p&gt;&lt;p&gt;- Based in his rules, will define the inventory action&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;* order necessary data:&lt;/b&gt;&lt;/p&gt;&lt;p&gt;- item&lt;/p&gt;&lt;p&gt;- amount&lt;/p&gt;&lt;p&gt;&lt;b&gt;* inventory actions:&lt;/b&gt;&lt;/p&gt;&lt;p&gt;- emit replacement order&lt;/p&gt;&lt;p&gt;- nothing&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;dashed=1;sketch=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="680" width="240" height="260" as="geometry" />
         </mxCell>
         <mxCell id="gHEY0DMogNfF5QJCRTJP-37" value="" style="group" vertex="1" connectable="0" parent="1">
           <mxGeometry x="60" y="120" width="680" height="160" as="geometry" />
@@ -78,6 +78,9 @@
         </mxCell>
         <mxCell id="gHEY0DMogNfF5QJCRTJP-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="gHEY0DMogNfF5QJCRTJP-35" source="gHEY0DMogNfF5QJCRTJP-3" target="gHEY0DMogNfF5QJCRTJP-7">
           <mxGeometry x="415" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="gHEY0DMogNfF5QJCRTJP-39" value="&lt;h1&gt;orders-model&lt;/h1&gt;&lt;p&gt;- amount&amp;nbsp;&lt;/p&gt;&lt;p&gt;- destiny (state, city, address)&lt;/p&gt;&lt;p&gt;- item&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;shadow=0;glass=0;dashed=1;sketch=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="840" width="190" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
