@@ -1,13 +1,17 @@
 import { Kafka, logLevel } from 'kafkajs'
+import OrderDestinyModel from '../../models/orderDestinyModel.js'
+import OrderFromStreamModel from '../../models/orderFromStreamModel.js'
+import DeliveryService from '../delivery/deliveryService.js'
 
 class StreamListenerService {
     constructor() {
-        this.topic = process.env.STREAM_TOPIC
         this.consumer = new Kafka({
             logLevel: logLevel.INFO,
             brokers: [process.env.STREAM_HOST],
             clientId: process.env.STREAM_CLIENT,
         }).consumer({ groupId: process.env.STREAM_CLIENT_GROUP })
+        this.deliveryService = new DeliveryService()
+        this.topic = process.env.STREAM_TOPIC
     }
 
     async initializeConsumer() {
@@ -20,42 +24,20 @@ class StreamListenerService {
     async startListening() {
         await this.consumer.run({
             eachMessage: async ({ topic, partition, message }) => {
-                const prefix = `${topic}[${partition} | ${message.offset}] / ${message.timestamp}`
-                const key = message.key.toString()
-                const value = message.value.toString()
+                try {
+                    const valueAsString = message.value.toString()
+                    const data = JSON.parse(valueAsString)
 
-                console.log(`- ${prefix} ${key} # ${value}`)
+                    const destiny = new OrderDestinyModel(data.destiny.state, data.destiny.city, data.destiny.address)
+                    const incommingOrder = new OrderFromStreamModel(data.amount, destiny, data.id, data.item)
+
+                    await this.deliveryService.processNewOrder(incommingOrder)
+                } catch (error) {
+                    console.error(`Error getting data from incomming order! '${error}'`)
+                }
             },
         })
     }
 }
 
 export default new StreamListenerService()
-
-// run().catch(e => console.error(`[example/consumer] ${e.message}`, e))
-
-// const errorTypes = ['unhandledRejection', 'uncaughtException']
-// const signalTraps = ['SIGTERM', 'SIGINT', 'SIGUSR2']
-
-// errorTypes.map(type => {
-//     process.on(type, async e => {
-//         try {
-//             console.log(`process.on ${type}`)
-//             console.error(e)
-//             await consumer.disconnect()
-//             process.exit(0)
-//         } catch (_) {
-//             process.exit(1)
-//         }
-//     })
-// })
-
-// signalTraps.map(type => {
-//     process.once(type, async () => {
-//         try {
-//             await consumer.disconnect()
-//         } finally {
-//             process.kill(process.pid, type)
-//         }
-//     })
-// })
