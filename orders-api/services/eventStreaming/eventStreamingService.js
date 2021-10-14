@@ -1,19 +1,20 @@
-export default class EventStreamingService {
+import { Kafka, CompressionTypes, logLevel } from 'kafkajs'
+
+class EventStreamingService {
     constructor() {
         this.producer = new Kafka({
             logLevel: logLevel.DEBUG,
-            brokers: [`${host}:9092`],
-            clientId: 'example-producer',
+            brokers: [process.env.STREAM_HOST],
+            clientId: process.env.STREAM_CLIENT,
         }).producer()
+        this.topic = process.env.STREAM_TOPIC
     }
 
     async postOrderOnStream(order) {
-        const { producer } = this
+        const { producer, topic } = this
 
         try {
-            const message = createMessage(order)
-
-            await producer.connect()
+            const message = this.createMessage(order)
 
             await producer.send({
                 topic,
@@ -21,17 +22,23 @@ export default class EventStreamingService {
                 messages: [message],
             })
 
-            await producer.disconnect()
         } catch (e) {
             return console.error(`Error streaming new order! Error: ${e}`)
         }
     }
 
-    createMessage(order) {
-        return {
-            key: order.id,
-            value: order,
-        }
+    async initializeProducer() {
+        return await this.producer.connect()
     }
 
+    createMessage(order) {
+        const value = JSON.stringify(order)
+
+        return {
+            key: `${order.id}`,
+            value,
+        }
+    }
 }
+
+export default new EventStreamingService()

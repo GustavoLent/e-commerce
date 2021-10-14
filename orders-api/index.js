@@ -1,7 +1,12 @@
 import app from './app.js'
+import streaming from './services/eventStreaming/eventStreamingService.js'
 
-const port = process.env.PORT
+streaming.initializeProducer().then(() => {
+    const port = process.env.PORT
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
+    app.listen(port, () => {
+        console.log(`Listening on port ${port}`);
+    });
+
+})
+

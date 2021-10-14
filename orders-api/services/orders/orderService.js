@@ -1,12 +1,11 @@
 import IncommingOrderModel from "../../models/incommingOrderModel.js";
 import OrderModel from "../../models/orderModel.js";
 import ResponseModel from "../../models/responseModel.js";
-import EventStreamingService from "../eventStreaming/eventStreamingService.js";
-import BarbecueResponseModel from "./barbecueResponseModel.js";
+import eventStreamingService from "../eventStreaming/eventStreamingService.js";
 
 export default class OrderService {
     constructor() {
-        this.eventStreamingService = new EventStreamingService()
+        this.eventStreamingService = eventStreamingService
     }
 
     async postNewOrder(amount, destiny, item) {
@@ -15,7 +14,7 @@ export default class OrderService {
         try {
             const incommingOrder = new IncommingOrderModel(amount, destiny, item)
 
-            const isValidOrder = await this._validateOrderByItemAndAmount(order)
+            const isValidOrder = await this._validateOrderByItemAndAmount(incommingOrder)
 
             if (!isValidOrder)
                 return ResponseModel.errorResponse('Pedido indisponível')

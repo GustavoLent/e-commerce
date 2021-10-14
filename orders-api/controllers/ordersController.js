@@ -1,4 +1,4 @@
-import OrderService from "../services/barbecue/orderService.js";
+import OrderService from "../services/orders/orderService.js";
 import express from "express";
 
 const orderService = new OrderService()
@@ -10,11 +10,11 @@ ordersRouter.post("/new", async (req, res) => {
     try {
         const response = await orderService.postNewOrder(amount, destiny, item)
 
-        if (response) {
-            return res.status(200).send(response);
+        if (response.success) {
+            return res.status(200).send(response.message);
         }
 
-        res.status(404).send("Error getting recommendation");
+        res.status(404).send(response.message);
     } catch (e) {
         res.status(500).send(e.message);
     }

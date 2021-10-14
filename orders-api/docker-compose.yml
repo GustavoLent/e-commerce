@@ -1,0 +1,17 @@
+version: '3.2'
+
+# networks:
+#   db-network:
+#     name: db-network
+# it will create the network, and with the name defined it will be accessible from other containers
+
+services:
+  orders-api:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "3010:3010"
+    # networks:
+    #   - db-network
+    env_file: .env
