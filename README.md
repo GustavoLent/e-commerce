@@ -22,7 +22,6 @@ Run all docker-compose files
 - Run delivery-service
 ```
     cd delivery-service
-   
     docker-compose up -d --build
 ```
 
