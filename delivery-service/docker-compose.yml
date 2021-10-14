@@ -5,12 +5,10 @@ networks:
     name: kafka-network
 
 services:
-  orders-api:
+  delivery-service:
     build:
       context: .
     restart: unless-stopped
     env_file: .env
-    ports:
-      - "3010:3010"
     networks:
       - kafka-network
