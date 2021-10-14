@@ -6,7 +6,7 @@
 * `docker`
 
 ## Running locally
-* Run all docker-compose files
+Run all docker-compose files
 
 
 - Run kafka
