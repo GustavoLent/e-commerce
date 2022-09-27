@@ -1,4 +1,4 @@
-# e-commerce Rules And Integration
+# e-commerce
 
 ## Prerequisites
 
